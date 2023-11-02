@@ -59,6 +59,8 @@ const AddTodo = () => {
   return (
     <Skeleton isLoaded={!isLoading}>
       <Box
+        width="80vw"
+        margin="auto"
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             handleSubmit(e);
