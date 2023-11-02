@@ -91,12 +91,14 @@ const TodoCard = ({ todo }: { todo: Todo }) => {
           {edit ? (
             <>
               <Input
+                bg="white"
                 autoFocus
                 value={title}
                 mb="2"
                 onChange={(e) => setTitle(e.target.value)}
               />
               <Input
+                bg="white"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
