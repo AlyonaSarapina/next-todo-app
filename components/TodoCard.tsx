@@ -84,13 +84,14 @@ const TodoCard = ({ todo }: { todo: Todo }) => {
             handleTodoEdit(e, todo.id);
           }
         }}
+        wordBreak="break-word"
         py="2"
         pl={{ base: "4", md: "4" }}
         pr={{ base: "2", md: "4" }}
         borderRadius="15px"
         border="2px solid #c5d3d9"
-        boxShadow="md"
-        transition="0.2s"
+        boxShadow="lg"
+        transition="0.3s"
         _hover={{ boxShadow: "none", cursor: "pointer" }}
         display="flex"
         justifyContent="space-between"
