@@ -2,8 +2,8 @@ import React from "react";
 import { Box, Button, Heading } from "@chakra-ui/react";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { FaGoogle } from "react-icons/fa";
-import { auth } from "../firebase";
-import useAuth from "../hooks/useAuth";
+import { auth } from "@/firebase";
+import useAuth from "@/hooks/useAuth";
 
 const Auth = () => {
   const { isLoggedIn, user } = useAuth();

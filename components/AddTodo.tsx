@@ -8,7 +8,7 @@ import {
   Box,
   Skeleton,
 } from "@chakra-ui/react";
-import useAuth from "../hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 import { addTodo } from "@/api/task";
 import { FormEvent, KeyboardEvent, useState } from "react";
 

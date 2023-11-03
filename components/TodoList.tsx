@@ -1,8 +1,8 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, Grid, SimpleGrid } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import useAuth from "../hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "@/firebase";
 import { Todo } from "@/types/todo";
 import TodoCard from "./TodoCard";
 
@@ -30,9 +30,14 @@ const TodoList = () => {
   }, [user]);
 
   return (
-    <Box mt={5} px={10} display="flex" flexDirection="column" gap="5">
+    <Grid
+      mt={5}
+      px={10}
+      templateColumns={`repeat(auto-fill, minmax(250px, 1fr))`}
+      gap="4"
+    >
       {todos && todos.map((todo) => <TodoCard todo={todo} key={todo.id} />)}
-    </Box>
+    </Grid>
   );
 };
 export default TodoList;

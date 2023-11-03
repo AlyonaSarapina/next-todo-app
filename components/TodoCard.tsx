@@ -13,6 +13,15 @@ import { FormEvent, Fragment, KeyboardEvent, useMemo, useState } from "react";
 import { FaToggleOff, FaToggleOn, FaTrash, FaEdit } from "react-icons/fa";
 import { deleteTodo, editTodo, toggleTodoStatus } from "@/api/task";
 
+const breakpoints = {
+  base: "0em",
+  sm: "30em",
+  md: "48em",
+  lg: "62em",
+  xl: "80em",
+  "2xl": "96em",
+};
+
 const TodoCard = ({ todo }: { todo: Todo }) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(todo.title);
@@ -76,16 +85,16 @@ const TodoCard = ({ todo }: { todo: Todo }) => {
           }
         }}
         py="2"
-        pl="8"
-        pr="4"
+        pl={{ base: "4", md: "4" }}
+        pr={{ base: "2", md: "4" }}
         borderRadius="15px"
+        border="2px solid #c5d3d9"
         boxShadow="md"
-        bgColor="#c5d3d9"
         transition="0.2s"
         _hover={{ boxShadow: "none", cursor: "pointer" }}
         display="flex"
-        alignItems="center"
         justifyContent="space-between"
+        gap={{ base: "5" }}
       >
         <Box display="flex" flexDirection="column">
           {edit ? (
@@ -105,16 +114,29 @@ const TodoCard = ({ todo }: { todo: Todo }) => {
             </>
           ) : (
             <>
-              <Heading as="h3" fontSize="medium">
+              <Heading
+                as="h3"
+                fontSize={{ base: "xs", md: "medium" }}
+                display="inline-block"
+              >
                 {todo.title.toUpperCase()}
               </Heading>
-              {todo.description && <Text>{todo.description}</Text>}
+              {todo.description && (
+                <Text fontSize={{ base: "xs", md: "medium" }}>
+                  {todo.description}
+                </Text>
+              )}
             </>
           )}
         </Box>
-        <Box display="flex" alignItems="center" gap="1">
+        <Box
+          display="flex"
+          flexDirection={{ base: "column" }}
+          gap="1"
+          alignItems="end"
+        >
           {edit ? (
-            <div className="flex flex-col gap-2">
+            <>
               <Button colorScheme="red" onClick={(e) => cancelEdit(e)}>
                 Cancel
               </Button>
@@ -124,59 +146,65 @@ const TodoCard = ({ todo }: { todo: Todo }) => {
               >
                 Edit
               </Button>
-            </div>
+            </>
           ) : (
             <>
-              <Badge bg="inherit">
-                <Text>{getDateString}</Text>
-              </Badge>
-              <Badge
-                opacity="0.8"
-                bg={todo.status == "pending" ? "yellow.500" : "green.500"}
-              >
-                {todo.status}
-              </Badge>
-              <Badge
-                color={todo.status == "pending" ? "gray.500" : "green.500"}
-                bg="inherit"
-                transition={"0.2s"}
-                _hover={{
-                  bg: "inherit",
-                  transform: "scale(1.2)",
-                }}
-                size="xs"
-                onClick={() => handleToggle(todo.id, todo.status)}
-              >
-                {todo.status == "pending" ? <FaToggleOff /> : <FaToggleOn />}
-              </Badge>
-              <Badge
-                color="blue.600"
-                bg="inherit"
-                transition={"0.2s"}
-                _hover={{
-                  bg: "inherit",
-                  transform: "scale(1.2)",
-                }}
-                size="xs"
-                onClick={() => {
-                  setEdit(true);
-                }}
-              >
-                <FaEdit />
-              </Badge>
-              <Badge
-                color="red.500"
-                bg="inherit"
-                transition={"0.2s"}
-                _hover={{
-                  bg: "inherit",
-                  transform: "scale(1.2)",
-                }}
-                size="xs"
-                onClick={() => handleTodoDelete(todo.id)}
-              >
-                <FaTrash />
-              </Badge>
+              <Box display="flex" flexDirection="column" alignItems="end">
+                <Badge bg="inherit">
+                  <Text>{getDateString}</Text>
+                </Badge>
+                <Badge
+                  textAlign="center"
+                  opacity="0.8"
+                  transition="0.5s ease-in-out"
+                  bg={todo.status == "pending" ? "yellow.500" : "green.500"}
+                >
+                  {todo.status}
+                </Badge>
+              </Box>
+              <Box>
+                <Badge
+                  color={todo.status == "pending" ? "gray.500" : "green.500"}
+                  bg="inherit"
+                  transition={"0.2s"}
+                  _hover={{
+                    bg: "inherit",
+                    transform: "scale(1.2)",
+                  }}
+                  size="xs"
+                  onClick={() => handleToggle(todo.id, todo.status)}
+                >
+                  {todo.status == "pending" ? <FaToggleOff /> : <FaToggleOn />}
+                </Badge>
+                <Badge
+                  color="blue.600"
+                  bg="inherit"
+                  transition={"0.2s"}
+                  _hover={{
+                    bg: "inherit",
+                    transform: "scale(1.2)",
+                  }}
+                  size="xs"
+                  onClick={() => {
+                    setEdit(true);
+                  }}
+                >
+                  <FaEdit />
+                </Badge>
+                <Badge
+                  color="red.500"
+                  bg="inherit"
+                  transition={"0.2s"}
+                  _hover={{
+                    bg: "inherit",
+                    transform: "scale(1.2)",
+                  }}
+                  size="xs"
+                  onClick={() => handleTodoDelete(todo.id)}
+                >
+                  <FaTrash />
+                </Badge>
+              </Box>
             </>
           )}
         </Box>
