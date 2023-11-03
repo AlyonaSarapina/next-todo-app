@@ -31,7 +31,7 @@ const TodoList = () => {
 
   return (
     <Grid
-      mt={5}
+      my={5}
       px={10}
       templateColumns={`repeat(auto-fill, minmax(250px, 1fr))`}
       gap="4"

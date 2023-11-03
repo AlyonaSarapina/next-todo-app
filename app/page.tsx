@@ -14,7 +14,7 @@ export default function Home() {
     <ChakraProvider>
       <Container maxW="7xl">
         <Auth />
-        <Collapse in={isLoggedIn} animateOpacity endingHeight="100vh">
+        <Collapse in={isLoggedIn} animateOpacity>
           <AddTodo />
           <TodoList />
         </Collapse>
