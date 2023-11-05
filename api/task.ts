@@ -18,7 +18,7 @@ const addTodo = async ({ id, title, description, status }: Todo) => {
       createdAt: new Date().getTime(),
     });
   } catch (err) {
-    console.log(err);
+    throw new Error(err as string);
   }
 };
 
@@ -29,7 +29,7 @@ const toggleTodoStatus = async (docId: string, status: string) => {
       status,
     });
   } catch (err) {
-    console.log(err);
+    throw new Error(err as string);
   }
 };
 
@@ -41,7 +41,7 @@ const editTodo = async (docId: string, title: string, description?: string) => {
       description,
     });
   } catch (err) {
-    console.log(err);
+    throw new Error(err as string);
   }
 };
 
@@ -50,7 +50,7 @@ const deleteTodo = async (docId: string) => {
     const todoRef = doc(db, "todo", docId);
     await deleteDoc(todoRef);
   } catch (err) {
-    console.log(err);
+    throw new Error(err as string);
   }
 };
 

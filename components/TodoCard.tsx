@@ -43,29 +43,52 @@ const TodoCard = ({ todo }: { todo: Todo }) => {
       setEdit(false);
       return;
     }
-    setIsLoading(true);
 
-    await editTodo(id, title, description);
+    try {
+      setIsLoading(true);
+      await editTodo(id, title, description);
+      toast({ title: "Todo updated successfully", status: "success" });
+      setEdit(false);
+    } catch (err) {
+      toast({
+        title: "The problem been detected while updating",
+        status: "error",
+      });
+      throw new Error("Problem occured");
+    }
 
     setIsLoading(false);
-    setEdit(false);
-
-    toast({ title: "Todo updated successfully", status: "success" });
   };
 
   const handleTodoDelete = async (id: string) => {
-    await deleteTodo(id);
-    toast({ title: "Todo deleted successfully", status: "success" });
+    try {
+      await deleteTodo(id);
+      toast({ title: "Todo deleted successfully", status: "success" });
+    } catch (err) {
+      toast({
+        title: "The problem been detected while deleting",
+        status: "error",
+      });
+      throw new Error("Problem occured");
+    }
   };
 
   const handleToggle = async (id: string, status: string) => {
     const newStatus = status == "completed" ? "pending" : "completed";
 
-    await toggleTodoStatus(id, newStatus);
-    toast({
-      title: `Todo marked ${newStatus}`,
-      status: newStatus == "completed" ? "success" : "warning",
-    });
+    try {
+      await toggleTodoStatus(id, newStatus);
+      toast({
+        title: `Todo marked ${newStatus}`,
+        status: newStatus == "completed" ? "success" : "warning",
+      });
+    } catch (err) {
+      toast({
+        title: "The problem been detected while updating",
+        status: "error",
+      });
+      throw new Error("Problem occured");
+    }
   };
 
   const cancelEdit = (e: FormEvent<HTMLButtonElement>) => {
