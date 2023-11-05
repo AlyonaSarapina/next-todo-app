@@ -2,6 +2,7 @@
 
 Welcome to Todo Test Table.
 This App allows you to manage your task by adding todo task, updating title, description and status of todo task, deleting todo task.
+All todos available by authentication through your Google account and stored in Firebase Cloudstore.
 
 ![Todo form and list](https://i.ibb.co/2kx8t1V/Screenshot-2023-11-05-at-1-37-57-PM.png)
 
